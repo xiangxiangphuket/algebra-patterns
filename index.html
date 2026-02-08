@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebra & Patterns Explorer - Grade 6</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        
+        .nav-tab {
+            background: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            color: #667eea;
+        }
+        
+        .nav-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .nav-tab.active {
+            background: #ffd700;
+            color: #333;
+        }
+        
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #ffd700;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .lesson-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+        
+        .example-box {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #ffc107;
+            position: relative;
+        }
+        
+        .example-box::before {
+            content: "📚 Example";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ffc107;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .investigation-box {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #17a2b8;
+        }
+        
+        .investigation-box::before {
+            content: "🔍 Investigation";
+            display: block;
+            font-weight: bold;
+            color: #17a2b8;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .pattern-display {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .matchstick-figure {
+            text-align: center;
+        }
+        
+        .matchstick-visual {
+            font-size: 3em;
+            margin: 10px;
+        }
+        
+        .formula-highlight {
+            background: #667eea;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #e9ecef;
+        }
+        
+        .input-table input {
+            width: 80px;
+            padding: 8px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1em;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #28a745;
+        }
+        
+        .btn-hint {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .quiz-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .question {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .question-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .option {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background: #dee2e6;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #e7e9ff;
+        }
+        
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .solution-steps {
+            display: none;
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .solution-steps.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .interactive-pattern {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .slider-container {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+        
+        .graph-container {
+            width: 100%;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .formula-box {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .key-concept {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .section-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .content-section { padding: 20px; }
+            .nav-tab { padding: 10px 15px; font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Algebra & Patterns Explorer</h1>
+            <p>Master Chapter 18: Complete Learning System with Section Assessments</p>
+        </header>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('patterns')">A. Patterns</button>
+            <button class="nav-tab" onclick="showSection('variables')">B. Variables</button>
+            <button class="nav-tab" onclick="showSection('algebraic')">C. Algebraic Form</button>
+            <button class="nav-tab" onclick="showSection('expressions')">D. Expressions</button>
+            <button class="nav-tab" onclick="showSection('substitution')">E. Substitution</button>
+            <button class="nav-tab" onclick="showSection('practical')">F. Practical</button>
+            <button class="nav-tab" onclick="showSection('graphs')">G. Graphs</button>
+        </div>
+        
+        <!-- Section A: Patterns -->
+        <div id="patterns" class="content-section active">
+            <div class="section-summary">
+                <h2>📐 Section A: Patterns</h2>
+                <p>Learn to identify geometric patterns, find rules, and predict future terms in matchstick sequences.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li>Geometric patterns follow predictable rules</li>
+                    <li>Find the constant difference between terms</li>
+                    <li>Formula format: M = kn + c (where k is the constant difference)</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Triangle Pattern</h3>
+                <p>Figure 1: 3 matches, Figure 2: 6 matches, Figure 3: 9 matches...</p>
+                <p>Constant difference: +3 each time</p>
+                <div class="formula-highlight">M = 3n</div>
+            </div>
+            
+            <div class="quiz-container" id="quiz-patterns"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('patterns')">Submit Section A</button>
+                <button class="btn" onclick="resetSection('patterns')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-patterns">Score: 0/12</div>
+        </div>
+        
+        <!-- Section B: Variables and Notation -->
+        <div id="variables" class="content-section">
+            <div class="section-summary">
+                <h2>🔤 Section B: Variables and Notation</h2>
+                <p>Master algebraic shorthand, product notation, and converting words to symbols.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Key Rules</h3>
+                <ul>
+                    <li>Omit the × sign in products</li>
+                    <li>Write numbers before variables: 2n not n2</li>
+                    <li>Write variables in alphabetical order: ab not ba</li>
+                    <li>Use letters to represent changing quantities (variables)</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Product Notation</h3>
+                <p>M = n × 2 - 1 becomes <span class="highlight">M = 2n - 1</span></p>
+                <p>a × b × 3 becomes <span class="highlight">3ab</span> (number first, then alphabetical)</p>
+            </div>
+            
+            <div class="quiz-container" id="quiz-variables"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('variables')">Submit Section B</button>
+                <button class="btn" onclick="resetSection('variables')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-variables">Score: 0/12</div>
+        </div>
+        
+        <!-- Section C: Algebraic Form -->
+        <div id="algebraic" class="content-section">
+            <div class="section-summary">
+                <h2>✍️ Section C: Algebraic Form</h2>
+                <p>Translate word sentences into algebraic expressions using operation keywords.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Operation Keywords</h3>
+                <table>
+                    <tr><th>Operation</th><th>Keywords</th><th>Example</th></tr>
+                    <tr><td>+</td><td>sum, plus, more than, exceeds</td><td>5 more than x = x + 5</td></tr>
+                    <tr><td>-</td><td>difference, minus, less than, subtract</td><td>3 less than y = y - 3</td></tr>
+                    <tr><td>×</td><td>product, times, double, twice</td><td>Double z = 2z</td></tr>
+                    <tr><td>÷</td><td>quotient, divided by, average</td><td>Average of a and b = (a+b)/2</td></tr>
+                </table>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Translation</h3>
+                <p>"Twice the sum of k and 4" = <span class="highlight">2(k + 4)</span></p>
+                <p>Important: Use parentheses for "the sum of" when multiplying!</p>
+            </div>
+            
+            <div class="quiz-container" id="quiz-algebraic"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('algebraic')">Submit Section C</button>
+                <button class="btn" onclick="resetSection('algebraic')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-algebraic">Score: 0/12</div>
+        </div>
+        
+        <!-- Section D: Value of Expressions -->
+        <div id="expressions" class="content-section">
+            <div class="section-summary">
+                <h2>🧮 Section D: The Value of an Expression</h2>
+                <p>Evaluate expressions by substituting values and following BEDMAS order.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>BEDMAS Order</h3>
+                <ol>
+                    <li><strong>B</strong>rackets</li>
+                    <li><strong>E</strong>xponents</li>
+                    <li><strong>D</strong>ivision and <strong>M</strong>ultiplication (left to right)</li>
+                    <li><strong>A</strong>ddition and <strong>S</strong>ubtraction (left to right)</li>
+                </ol>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Evaluation</h3>
+                <p>Find 4x - 11 when x = -2:</p>
+                <div class="step">4(-2) - 11</div>
+                <div class="step">= -8 - 11</div>
+                <div class="step">= <strong>-19</strong></div>
+            </div>
+            
+            <div class="quiz-container" id="quiz-expressions"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('expressions')">Submit Section D</button>
+                <button class="btn" onclick="resetSection('expressions')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-expressions">Score: 0/12</div>
+        </div>
+        
+        <!-- Section E: Substitution into Formulae -->
+        <div id="substitution" class="content-section">
+            <div class="section-summary">
+                <h2>🔄 Section E: Substituting into Formulae</h2>
+                <p>Use formulas to calculate unknown values by substitution.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Substitution Steps</h3>
+                <ol>
+                    <li>Identify the formula</li>
+                    <li>Replace the variable with the given value</li>
+                    <li>Calculate using BEDMAS</li>
+                    <li>Include units in your answer</li>
+                </ol>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Tennis Court Hire</h3>
+                <p>Formula: C = 5h + 8 (C = cost in $, h = hours)</p>
+                <p>For 4 hours: C = 5(4) + 8 = 20 + 8 = <strong>$28</strong></p>
+            </div>
+            
+            <div class="quiz-container" id="quiz-substitution"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('substitution')">Submit Section E</button>
+                <button class="btn" onclick="resetSection('substitution')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-substitution">Score: 0/12</div>
+        </div>
+        
+        <!-- Section F: Practical Problems -->
+        <div id="practical" class="content-section">
+            <div class="section-summary">
+                <h2>🚚 Section F: Practical Problems Using Formulae</h2>
+                <p>Create and use formulas for real-world situations.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Common Problem Types</h3>
+                <ul>
+                    <li><strong>Hire/Cost problems:</strong> Fixed fee + rate per unit</li>
+                    <li><strong>Growth problems:</strong> Initial amount + rate of change</li>
+                    <li><strong>Rate problems:</strong> Distance, speed, time relationships</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Joe's Truck Hire</h3>
+                <p>£14 initial + £3 per km</p>
+                <div class="formula-highlight">H = 3d + 14</div>
+                <p>For 38.7 km: H = 3(38.7) + 14 = 116.1 + 14 = <strong>£130.10</strong></p>
+            </div>
+            
+            <div class="quiz-container" id="quiz-practical"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('practical')">Submit Section F</button>
+                <button class="btn" onclick="resetSection('practical')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-practical">Score: 0/12</div>
+        </div>
+        
+        <!-- Section G: Linear Graphs -->
+        <div id="graphs" class="content-section">
+            <div class="section-summary">
+                <h2>📈 Section G: Linear Graphs</h2>
+                <p>Visualize linear relationships and read values from graphs.</p>
+            </div>
+            
+            <div class="lesson-box">
+                <h3>Linear Graph Properties</h3>
+                <ul>
+                    <li>Points form a <strong>straight line</strong></li>
+                    <li>Constant rate of change (slope)</li>
+                    <li>Can read values between plotted points (interpolation)</li>
+                    <li>Formula: y = mx + c (m = slope, c = y-intercept)</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h3>Example: Reading Graphs</h3>
+                <p>From Joe's truck graph (H = 3d + 14):</p>
+                <div class="step">When d = 12 km, H = £50</div>
+                <div class="step">When d = 18 km, H = £68</div>
+            </div>
+            
+            <div class="quiz-container" id="quiz-graphs"></div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="submitSection('graphs')">Submit Section G</button>
+                <button class="btn" onclick="resetSection('graphs')">Reset Section</button>
+            </div>
+            
+            <div class="score-display" id="score-graphs">Score: 0/12</div>
+        </div>
+    </div>
+    
+    <script>
+        // Question banks for each section (12 questions each)
+        const questionBanks = {
+            patterns: [
+                {
+                    question: "In the triangle matchstick pattern, Figure 1 uses 3 matches. If each new triangle adds 3 matches, how many matches in Figure 7?",
+                    options: ["18", "21", "24", "27"],
+                    correct: 1,
+                    solution: ["Pattern: Each figure adds 3 matches", "Formula: M = 3n", "Figure 7: M = 3 × 7 = 21", "Answer: 21 matches"]
+                },
+                {
+                    question: "A pattern has figures with matchsticks: 4, 7, 10, 13... What is the constant difference?",
+                    options: ["2", "3", "4", "5"],
+                    correct: 1,
+                    solution: ["7 - 4 = 3", "10 - 7 = 3", "13 - 10 = 3", "Constant difference is 3"]
+                },
+                {
+                    question: "For the pattern 4, 7, 10, 13..., what is the formula for matchsticks M in figure n?",
+                    options: ["M = 3n", "M = 3n + 1", "M = 4n", "M = n + 3"],
+                    correct: 1,
+                    solution: ["Constant difference is 3, so start with 3n", "Check: When n=1, 3(1)=3, but we need 4", "So add 1: M = 3n + 1", "Verify: n=2 → 3(2)+1=7 ✓"]
+                },
+                {
+                    question: "A square pattern uses 4, 7, 10, 13... matches. How many matches for Figure 20?",
+                    options: ["60", "61", "62", "63"],
+                    correct: 1,
+                    solution: ["Formula: M = 3n + 1", "Substitute n = 20: M = 3(20) + 1", "Calculate: 60 + 1 = 61", "Answer: 61 matches"]
+                },
+                {
+                    question: "Pattern: 5, 8, 11, 14... What is the formula?",
+                    options: ["M = 3n + 2", "M = 2n + 3", "M = 5n", "M = n + 4"],
+                    correct: 0,
+                    solution: ["Difference is 3 (8-5=3, 11-8=3)", "Try M = 3n: n=1 gives 3, need 5", "Add 2: M = 3n + 2", "Check: n=2 → 3(2)+2=8 ✓"]
+                },
+                {
+                    question: "In a pattern where M = 2n + 3, how many matchsticks in Figure 15?",
+                    options: ["30", "33", "36", "45"],
+                    correct: 1,
+                    solution: ["Formula: M = 2n + 3", "Substitute n = 15: M = 2(15) + 3", "Calculate: 30 + 3 = 33", "Answer: 33"]
+                },
+                {
+                    question: "Pattern starts with 6 matches and adds 4 each time. What is Figure 5?",
+                    options: ["18", "20", "22", "24"],
+                    correct: 2,
+                    solution: ["Figure 1: 6", "Figure 2: 6+4=10", "Figure 3: 10+4=14", "Figure 4: 14+4=18", "Figure 5: 18+4=22", "Or use formula: M = 4n + 2 → 4(5)+2=22"]
+                },
+                {
+                    question: "Which formula represents: start with 1, add 2 each time?",
+                    options: ["M = 2n", "M = 2n - 1", "M = n + 2", "M = 2n + 1"],
+                    correct: 1,
+                    solution: ["Sequence: 1, 3, 5, 7...", "Difference is 2, so 2n", "n=1: need 1, but 2(1)=2", "Subtract 1: M = 2n - 1", "Check: n=1 → 2(1)-1=1 ✓"]
+                },
+                {
+                    question: "A hexagon pattern uses 6, 11, 16, 21... matches. What is the formula?",
+                    options: ["M = 5n + 1", "M = 6n", "M = 4n + 2", "M = 5n - 1"],
+                    correct: 0,
+                    solution: ["Difference is 5 (11-6=5)", "Try M = 5n: n=1 gives 5, need 6", "Add 1: M = 5n + 1", "Verify: n=2 → 5(2)+1=11 ✓"]
+                },
+                {
+                    question: "If M = 4n - 3, which figure has 37 matchsticks?",
+                    options: ["8", "9", "10", "11"],
+                    correct: 2,
+                    solution: ["Set up equation: 4n - 3 = 37", "Add 3 to both sides: 4n = 40", "Divide by 4: n = 10", "Answer: Figure 10"]
+                },
+                {
+                    question: "Pattern: 7, 12, 17, 22... What is Figure 8?",
+                    options: ["38", "40", "42", "44"],
+                    correct: 2,
+                    solution: ["Difference is 5", "Formula: M = 5n + 2 (since 5(1)+2=7)", "Figure 8: M = 5(8) + 2 = 40 + 2 = 42", "Answer: 42"]
+                },
+                {
+                    question: "A pattern starts with 2 matches. Each figure adds 5 matches. What is the formula?",
+                    options: ["M = 5n + 2", "M = 5n - 3", "M = 2n + 5", "M = 7n"],
+                    correct: 1,
+                    solution: ["Difference is 5, so 5n", "n=1: need 2, but 5(1)=5", "Subtract 3: M = 5n - 3", "Check: n=1 → 5-3=2 ✓, n=2 → 10-3=7 ✓ (adds 5)"]
+                }
+            ],
+            
+            variables: [
+                {
+                    question: "Write using product notation: M = n × 3 + 2",
+                    options: ["M = n3 + 2", "M = 3n + 2", "M = 3 × n + 2", "M = n × 3 + 2"],
+                    correct: 1,
+                    solution: ["Rule: Omit × sign", "Rule: Write number before variable", "n × 3 becomes 3n", "Answer: M = 3n + 2"]
+                },
+                {
+                    question: "Write in product notation: a × b × 4",
+                    options: ["ab4", "4ab", "ba4", "4ba"],
+                    correct: 1,
+                    solution: ["Rule: Number comes first: 4", "Rule: Variables in alphabetical order: a, then b", "Answer: 4ab"]
+                },
+                {
+                    question: "Convert to algebraic form: 'M is five times n, minus three'",
+                    options: ["M = 5 - n - 3", "M = 5n - 3", "M = 5(n - 3)", "M = n5 - 3"],
+                    correct: 1,
+                    solution: ["'Five times n' = 5n", "'Minus three' = - 3", "Combined: M = 5n - 3", "Answer: M = 5n - 3"]
+                },
+                {
+                    question: "Write using product notation: x × 2 × y × 3",
+                    options: ["6xy", "23xy", "2x3y", "6yx"],
+                    correct: 0,
+                    solution: ["Multiply numbers: 2 × 3 = 6", "Variables in order: x, then y", "Answer: 6xy"]
+                },
+                {
+                    question: "Which is correct for 'The number of shapes s is two more than the figure number n'?",
+                    options: ["s = 2n", "s = n + 2", "s = 2 + n", "Both B and C"],
+                    correct: 3,
+                    solution: ["'Two more than n' means n + 2", "Also correct: 2 + n (addition is commutative)", "Both s = n + 2 and s = 2 + n are acceptable", "Answer: Both B and C"]
+                },
+                {
+                    question: "Write in product notation: 7 × m - 4 × n",
+                    options: ["7m - 4n", "7m - n4", "m7 - 4n", "m7 - n4"],
+                    correct: 0,
+                    solution: ["7 × m becomes 7m (number first)", "4 × n becomes 4n (number first)", "Answer: 7m - 4n"]
+                },
+                {
+                    question: "Convert: 'To obtain N, add one to n, then double the result'",
+                    options: ["N = 2n + 1", "N = 2(n + 1)", "N = n + 2", "N = 2n + 2"],
+                    correct: 1,
+                    solution: ["'Add one to n' = n + 1", "'Then double' means multiply all by 2", "Need parentheses: 2(n + 1)", "Answer: N = 2(n + 1) or N = 2n + 2 when expanded"]
+                },
+                {
+                    question: "Write using product notation: b × 3 × a",
+                    options: ["3ab", "3ba", "ab3", "ba3"],
+                    correct: 0,
+                    solution: ["Number first: 3", "Variables alphabetical: a, then b (not b, then a)", "Answer: 3ab"]
+                },
+                {
+                    question: "Which represents 'M is three times n, plus one' correctly?",
+                    options: ["M = 3n + 1", "M = 3(n + 1)", "M = n3 + 1", "M = 3 + n"],
+                    correct: 0,
+                    solution: ["'Three times n' = 3n", "'Plus one' = + 1", "Answer: M = 3n + 1", "Note: n3 would mean n cubed, not 3 times n"]
+                },
+                {
+                    question: "Write in algebraic form: 'The number of matches M is twice the figure number n, minus four'",
+                    options: ["M = 2n - 4", "M = 2(n - 4)", "M = n - 4 × 2", "M = 2 - 4n"],
+                    correct: 0,
+                    solution: ["'Twice the figure number' = 2n", "'Minus four' = - 4", "Answer: M = 2n - 4", "Note: only subtract 4, not multiply (n-4) by 2"]
+                },
+                {
+                    question: "Write using product notation: 5 × s + 3 × t",
+                    options: ["5s + 3t", "s5 + t3", "5s + t3", "s5 + 3t"],
+                    correct: 0,
+                    solution: ["5 × s = 5s", "3 × t = 3t", "Answer: 5s + 3t"]
+                },
+                {
+                    question: "Convert: 'N is seven more than three times n'",
+                    options: ["N = 7n + 3", "N = 3n + 7", "N = 3(n + 7)", "N = 21n"],
+                    correct: 1,
+                    solution: ["'Three times n' = 3n", "'Seven more than' = + 7", "Answer: N = 3n + 7", "Order matters: seven more than (3n) means 3n + 7"]
+                }
+            ],
+            
+            algebraic: [
+                {
+                    question: "Write in algebraic form: the sum of p and q",
+                    options: ["pq", "p + q", "p × q", "p - q"],
+                    correct: 1,
+                    solution: ["'Sum' means add", "Sum of p and q = p + q", "Answer: p + q"]
+                },
+                {
+                    question: "Write in algebraic form: 3 more than a",
+                    options: ["3a", "a + 3", "3 + a", "Both B and C"],
+                    correct: 3,
+                    solution: ["'More than' means add", "3 more than a = a + 3", "Also = 3 + a (same thing)", "Answer: Both B and C"]
+                },
+                {
+                    question: "Write in algebraic form: double n, add 5",
+                    options: ["2n + 5", "2(n + 5)", "n + 10", "2n5"],
+                    correct: 0,
+                    solution: ["'Double n' = 2n", "'Add 5' = + 5", "Answer: 2n + 5", "Note: not 2(n+5) because we only double n, not (n+5)"]
+                },
+                {
+                    question: "Write in algebraic form: the average of m and n",
+                    options: ["m + n / 2", "(m + n) / 2", "m + n ÷ 2", "mn / 2"],
+                    correct: 1,
+                    solution: ["Average = sum ÷ count", "Sum of m and n = m + n", "Must use brackets: (m + n)", "Divide by 2: (m + n) / 2", "Answer: (m + n) / 2"]
+                },
+                {
+                    question: "Write in algebraic form: a number which exceeds r by t",
+                    options: ["r - t", "r + t", "r × t", "r / t"],
+                    correct: 1,
+                    solution: ["'Exceeds by' means more than", "Example: 7 exceeds 4 by 3 → 7 = 4 + 3", "r exceeds by t means r + t", "Answer: r + t"]
+                },
+                {
+                    question: "Write in algebraic form: 5 divided by the sum of r and s",
+                    options: ["5 / r + s", "5 / (r + s)", "5 ÷ r + s", "(5 / r) + s"],
+                    correct: 1,
+                    solution: ["'Sum of r and s' = (r + s) - needs brackets!", "'5 divided by' that sum", "Answer: 5 / (r + s)", "Without brackets, only r would be divided"]
+                },
+                {
+                    question: "Write in algebraic form: treble the sum of a and 6",
+                    options: ["3a + 6", "3(a + 6)", "a + 18", "3a + 18"],
+                    correct: 1,
+                    solution: ["'Sum of a and 6' = (a + 6)", "'Treble' means multiply by 3", "Must multiply the whole sum: 3(a + 6)", "Answer: 3(a + 6)"]
+                },
+                {
+                    question: "Write in algebraic form: d less than n",
+                    options: ["d - n", "n - d", "d + n", "n / d"],
+                    correct: 1,
+                    solution: ["'Less than' means subtract FROM the second number", "d less than n = n - d (not d - n)", "Example: 3 less than 10 = 10 - 3 = 7", "Answer: n - d"]
+                },
+                {
+                    question: "Write in algebraic form: the product of 3 and m",
+                    options: ["3 + m", "3m", "3 / m", "m - 3"],
+                    correct: 1,
+                    solution: ["'Product' means multiply", "Product of 3 and m = 3 × m = 3m", "Answer: 3m"]
+                },
+                {
+                    question: "Write in algebraic form: twice the sum of k and 4",
+                    options: ["2k + 4", "2(k + 4)", "k + 8", "2k + 8"],
+                    correct: 1,
+                    solution: ["'Sum of k and 4' = (k + 4)", "'Twice' means multiply by 2", "Multiply the whole sum: 2(k + 4)", "Answer: 2(k + 4)"]
+                },
+                {
+                    question: "Write in algebraic form: a third of g",
+                    options: ["3g", "g / 3", "g - 3", "3 / g"],
+                    correct: 1,
+                    solution: ["'A third of' means divide by 3", "A third of g = g ÷ 3 = g / 3", "Answer: g / 3"]
+                },
+                {
+                    question: "Write in algebraic form: 4 more than the product of x and y",
+                    options: ["4xy", "4 + xy", "4x + y", "(4 + x)y"],
+                    correct: 1,
+                    solution: ["'Product of x and y' = xy", "'4 more than' = + 4", "Answer: xy + 4 or 4 + xy"]
+                }
+            ],
+            
+            expressions: [
+                {
+                    question: "Evaluate 5x - 3 when x = 4",
+                    options: ["17", "23", "12", "8"],
+                    correct: 0,
+                    solution: ["Substitute x = 4: 5(4) - 3", "Multiply: 20 - 3", "Subtract: 17", "Answer: 17"]
+                },
+                {
+                    question: "Evaluate 3x + 7 when x = -2",
+                    options: ["1", "13", "-1", "-13"],
+                    correct: 0,
+                    solution: ["Substitute x = -2: 3(-2) + 7", "Multiply: -6 + 7", "Add: 1", "Answer: 1"]
+                },
+                {
+                    question: "Evaluate x/2 + 4 when x = 6",
+                    options: ["7", "6", "8", "5"],
+                    correct: 0,
+                    solution: ["Substitute x = 6: 6/2 + 4", "Divide: 3 + 4", "Add: 7", "Answer: 7"]
+                },
+                {
+                    question: "Evaluate 4(x + 3) when x = 7",
+                    options: ["40", "28", "19", "48"],
+                    correct: 0,
+                    solution: ["Substitute x = 7: 4(7 + 3)", "Brackets first: 4(10)", "Multiply: 40", "Answer: 40"]
+                },
+                {
+                    question: "Evaluate 6 - x² when x = 3",
+                    options: ["3", "-3", "0", "9"],
+                    correct: 1,
+                    solution: ["Substitute x = 3: 6 - (3)²", "Exponent: 6 - 9", "Subtract: -3", "Answer: -3"]
+                },
+                {
+                    question: "Evaluate (x + 4)/3 when x = 5",
+                    options: ["3", "4", "5", "2"],
+                    correct: 0,
+                    solution: ["Substitute x = 5: (5 + 4)/3", "Brackets: 9/3", "Divide: 3", "Answer: 3"]
+                },
+                {
+                    question: "Evaluate 2x - 1 when x = 0",
+                    options: ["-1", "1", "0", "2"],
+                    correct: 0,
+                    solution: ["Substitute x = 0: 2(0) - 1", "Multiply: 0 - 1", "Subtract: -1", "Answer: -1"]
+                },
+                {
+                    question: "Evaluate 5 - 2x when x = 3",
+                    options: ["-1", "1", "11", "-11"],
+                    correct: 0,
+                    solution: ["Substitute x = 3: 5 - 2(3)", "Multiply: 5 - 6", "Subtract: -1", "Answer: -1"]
+                },
+                {
+                    question: "Evaluate x/3 - 2 when x = 12",
+                    options: ["2", "6", "4", "0"],
+                    correct: 0,
+                    solution: ["Substitute x = 12: 12/3 - 2", "Divide: 4 - 2", "Subtract: 2", "Answer: 2"]
+                },
+                {
+                    question: "Evaluate 3x + 2 when x = -3",
+                    options: ["-7", "-11", "7", "11"],
+                    correct: 0,
+                    solution: ["Substitute x = -3: 3(-3) + 2", "Multiply: -9 + 2", "Add: -7", "Answer: -7"]
+                },
+                {
+                    question: "Evaluate (2x - 1)/5 when x = 8",
+                    options: ["3", "15", "5", "2"],
+                    correct: 0,
+                    solution: ["Substitute x = 8: (2(8) - 1)/5", "Multiply: (16 - 1)/5", "Subtract: 15/5", "Divide: 3", "Answer: 3"]
+                },
+                {
+                    question: "Evaluate 50 - 4x when x = 10",
+                    options: ["10", "90", "46", "14"],
+                    correct: 0,
+                    solution: ["Substitute x = 10: 50 - 4(10)", "Multiply: 50 - 40", "Subtract: 10", "Answer: 10"]
+                }
+            ],
+            
+            substitution: [
+                {
+                    question: "Using M = 2n - 1, find M when n = 10",
+                    options: ["18", "19", "20", "21"],
+                    correct: 1,
+                    solution: ["Formula: M = 2n - 1", "Substitute n = 10: M = 2(10) - 1", "Calculate: 20 - 1 = 19", "Answer: 19"]
+                },
+                {
+                    question: "Using C = 5h + 8, find the cost for 6 hours",
+                    options: ["$38", "$40", "$30", "$48"],
+                    correct: 0,
+                    solution: ["Formula: C = 5h + 8", "Substitute h = 6: C = 5(6) + 8", "Calculate: 30 + 8 = 38", "Answer: $38"]
+                },
+                {
+                    question: "Using W = 3t + 2, find W when t = 6",
+                    options: ["18", "20", "22", "24"],
+                    correct: 1,
+                    solution: ["Formula: W = 3t + 2", "Substitute t = 6: W = 3(6) + 2", "Calculate: 18 + 2 = 20", "Answer: 20"]
+                },
+                {
+                    question: "Using D = (50 × a)/(a + 12), find dose for age 4",
+                    options: ["10 mL", "12.5 mL", "14.29 mL", "16 mL"],
+                    correct: 1,
+                    solution: ["Formula: D = (50 × a)/(a + 12)", "Substitute a = 4: D = (50 × 4)/(4 + 12)", "Calculate: 200/16 = 12.5", "Answer: 12.5 mL"]
+                },
+                {
+                    question: "Using P = 3n + 7, find profit for 15 spanner sets",
+                    options: ["$45", "$52", "$48", "$60"],
+                    correct: 1,
+                    solution: ["Formula: P = 3n + 7", "Substitute n = 15: P = 3(15) + 7", "Calculate: 45 + 7 = 52", "Answer: $52"]
+                },
+                {
+                    question: "Using M = 3n + 1, how many matchsticks in Figure 20?",
+                    options: ["60", "61", "62", "63"],
+                    correct: 1,
+                    solution: ["Formula: M = 3n + 1", "Substitute n = 20: M = 3(20) + 1", "Calculate: 60 + 1 = 61", "Answer: 61"]
+                },
+                {
+                    question: "Using C = 1.80n + 3 (taxi), find cost for 10 km",
+                    options: ["$18", "$21", "$20", "$24"],
+                    correct: 1,
+                    solution: ["Formula: C = 1.80n + 3", "Substitute n = 10: C = 1.80(10) + 3", "Calculate: 18 + 3 = 21", "Answer: $21"]
+                },
+                {
+                    question: "Using H = 3d + 14, find hire fee for 12 km",
+                    options: ["£40", "£50", "£48", "£52"],
+                    correct: 1,
+                    solution: ["Formula: H = 3d + 14", "Substitute d = 12: H = 3(12) + 14", "Calculate: 36 + 14 = 50", "Answer: £50"]
+                },
+                {
+                    question: "Using F = 2h + 8, find river flow after 5 hours",
+                    options: ["16 cumecs", "18 cumecs", "20 cumecs", "22 cumecs"],
+                    correct: 1,
+                    solution: ["Formula: F = 2h + 8", "Substitute h = 5: F = 2(5) + 8", "Calculate: 10 + 8 = 18", "Answer: 18 cumecs"]
+                },
+                {
+                    question: "Using M = 4n - 3, find matchsticks for Figure 8",
+                    options: ["28", "29", "30", "32"],
+                    correct: 1,
+                    solution: ["Formula: M = 4n - 3", "Substitute n = 8: M = 4(8) - 3", "Calculate: 32 - 3 = 29", "Answer: 29"]
+                },
+                {
+                    question: "Using C = 30h + 40 (mechanic), find cost for 3.5 hours",
+                    options: ["$105", "$135", "$145", "$165"],
+                    correct: 2,
+                    solution: ["Formula: C = 30h + 40", "Substitute h = 3.5: C = 30(3.5) + 40", "Calculate: 105 + 40 = 145", "Answer: $145"]
+                },
+                {
+                    question: "Using S = n + 3, find S when n = 0",
+                    options: ["0", "3", "1", "-3"],
+                    correct: 1,
+                    solution: ["Formula: S = n + 3", "Substitute n = 0: S = 0 + 3", "Calculate: 3", "Answer: 3"]
+                }
+            ],
+            
+            practical: [
+                {
+                    question: "A plumber charges $50 callout plus $40 per hour. Write the formula for cost C for h hours.",
+                    options: ["C = 40h + 50", "C = 50h + 40", "C = 90h", "C = 40(h + 50)"],
+                    correct: 0,
+                    solution: ["Rate per hour: $40 → 40h", "Fixed callout: $50 → + 50", "Formula: C = 40h + 50", "Answer: C = 40h + 50"]
+                },
+                {
+                    question: "Using C = 40h + 50, what is the cost for 2 hours work?",
+                    options: ["$130", "$90", "$140", "$100"],
+                    correct: 0,
+                    solution: ["Formula: C = 40h + 50", "Substitute h = 2: C = 40(2) + 50", "Calculate: 80 + 50 = 130", "Answer: $130"]
+                },
+                {
+                    question: "A taxi charges $4 flagfall plus $2.50 per km. Write the formula.",
+                    options: ["C = 4n + 2.50", "C = 2.50n + 4", "C = 6.50n", "C = 4(n + 2.50)"],
+                    correct: 1,
+                    solution: ["Rate per km: $2.50 → 2.50n", "Flagfall (fixed): $4 → + 4", "Formula: C = 2.50n + 4", "Answer: C = 2.50n + 4"]
+                },
+                {
+                    question: "A plant starts at 5 cm and grows 2 cm per week. Write height formula.",
+                    options: ["H = 2w + 5", "H = 5w + 2", "H = 7w", "H = 5 + 2 + w"],
+                    correct: 0,
+                    solution: ["Growth rate: 2 cm/week → 2w", "Initial height: 5 cm → + 5", "Formula: H = 2w + 5", "Answer: H = 2w + 5"]
+                },
+                {
+                    question: "Using H = 2w + 5, how tall after 8 weeks?",
+                    options: ["16 cm", "21 cm", "26 cm", "13 cm"],
+                    correct: 1,
+                    solution: ["Formula: H = 2w + 5", "Substitute w = 8: H = 2(8) + 5", "Calculate: 16 + 5 = 21", "Answer: 21 cm"]
+                },
+                {
+                    question: "A car rental costs $60 per day plus $0.30 per km. Write formula for d days and k km.",
+                    options: ["C = 60d + 0.30k", "C = 60d + 0.30", "C = 60 + 0.30k", "C = 60.30(d + k)"],
+                    correct: 0,
+                    solution: ["Daily rate: $60 per day → 60d", "Distance rate: $0.30 per km → 0.30k", "Formula: C = 60d + 0.30k", "Answer: C = 60d + 0.30k"]
+                },
+                {
+                    question: "A phone plan costs $20 monthly plus $0.10 per minute. What's the cost for 100 minutes?",
+                    options: ["$30", "$20.10", "$120", "$30.10"],
+                    correct: 0,
+                    solution: ["Formula: C = 0.10m + 20", "Substitute m = 100: C = 0.10(100) + 20", "Calculate: 10 + 20 = 30", "Answer: $30"]
+                },
+                {
+                    question: "A runner takes 5 minutes for first km and adds 30 seconds for each additional km. Time for km n?",
+                    options: ["T = 5 + 0.5n", "T = 5 + 0.5(n-1)", "T = 4.5 + 0.5n", "T = 5n + 0.5"],
+                    correct: 1,
+                    solution: ["First km: 5 minutes", "Additional kms: add 0.5 minutes each", "For km n, there are (n-1) additional kms before it", "Formula: T = 5 + 0.5(n-1)", "Answer: T = 5 + 0.5(n-1)"]
+                },
+                {
+                    question: "Electrician charges $40 first hour then $30 per additional hour. Cost for 3 hours?",
+                    options: ["$90", "$100", "$130", "$120"],
+                    correct: 1,
+                    solution: ["First hour: $40", "Additional hours: 2 hours × $30 = $60", "Total: 40 + 60 = $100", "Or formula: C = 40 + 30(h-1) = 40 + 30(2) = 100", "Answer: $100"]
+                },
+                {
+                    question: "A tank contains 100 liters and drains at 5 liters per minute. Write formula for remaining volume.",
+                    options: ["V = 100 - 5t", "V = 5t - 100", "V = 100 + 5t", "V = 95t"],
+                    correct: 0,
+                    solution: ["Initial amount: 100 liters", "Draining (subtracting): 5 liters per minute → -5t", "Formula: V = 100 - 5t", "Answer: V = 100 - 5t"]
+                },
+                {
+                    question: "Using V = 100 - 5t, how much remains after 12 minutes?",
+                    options: ["40 liters", "60 liters", "35 liters", "45 liters"],
+                    correct: 0,
+                    solution: ["Formula: V = 100 - 5t", "Substitute t = 12: V = 100 - 5(12)", "Calculate: 100 - 60 = 40", "Answer: 40 liters"]
+                },
+                {
+                    question: "A hotel charges $80 per night plus $15 per person. Cost for n nights and p people?",
+                    options: ["C = 80n + 15p", "C = 80 + 15 + n + p", "C = 95(n + p)", "C = (80 + 15)np"],
+                    correct: 0,
+                    solution: ["Nights: $80 per night → 80n", "People: $15 per person → 15p", "Formula: C = 80n + 15p", "Answer: C = 80n + 15p"]
+                }
+            ],
+            
+            graphs: [
+                {
+                    question: "What makes a graph 'linear'?",
+                    options: ["It's curved", "Points form a straight line", "It has many colors", "It shows circles"],
+                    correct: 1,
+                    solution: ["Linear means 'straight line'", "Linear graphs have points that lie in a straight line", "This happens with constant rate of change", "Answer: Points form a straight line"]
+                },
+                {
+                    question: "For H = 3d + 14, what is the cost when d = 0?",
+                    options: ["$0", "$3", "$14", "$17"],
+                    correct: 2,
+                    solution: ["Formula: H = 3d + 14", "When d = 0: H = 3(0) + 14", "Calculate: 0 + 14 = 14", "This is the y-intercept (starting value)", "Answer: $14"]
+                },
+                {
+                    question: "On a linear graph, if x increases by 1 and y increases by 3 each time, what is the slope?",
+                    options: ["1", "3", "4", "Cannot tell"],
+                    correct: 1,
+                    solution: ["Slope = change in y / change in x", "Change in y = 3", "Change in x = 1", "Slope = 3/1 = 3", "Answer: 3"]
+                },
+                {
+                    question: "From the table: d=0,H=14; d=1,H=17; d=2,H=20. What is H when d=5?",
+                    options: ["23", "26", "29", "32"],
+                    correct: 2,
+                    solution: ["Pattern: Each increase of 1 in d adds 3 to H", "From d=2 to d=5 is +3", "H increases by 3×3 = 9", "20 + 9 = 29", "Or use formula H = 3d + 14: 3(5) + 14 = 29", "Answer: 29"]
+                },
+                {
+                    question: "A linear graph passes through (0, 10) and (1, 13). What is the formula?",
+                    options: ["y = 10x + 13", "y = 3x + 10", "y = 13x", "y = 10x + 3"],
+                    correct: 1,
+                    solution: ["From (0,10): when x=0, y=10 → y-intercept is 10", "From (0,10) to (1,13): x increases by 1, y increases by 3", "Slope = 3", "Formula: y = 3x + 10", "Answer: y = 3x + 10"]
+                },
+                {
+                    question: "For P = 3n + 7, what is the profit when n = 0?",
+                    options: ["$0", "$3", "$7", "$10"],
+                    correct: 2,
+                    solution: ["Formula: P = 3n + 7", "When n = 0: P = 3(0) + 7", "Calculate: 0 + 7 = 7", "This is the base profit (y-intercept)", "Answer: $7"]
+                },
+                {
+                    question: "A graph shows height starting at 8 cm and increasing 2 cm per week. Formula?",
+                    options: ["H = 8w", "H = 2w + 8", "H = 8w + 2", "H = 10w"],
+                    correct: 1,
+                    solution: ["Initial height (w=0): 8 cm → +8", "Rate of increase: 2 cm/week → 2w", "Formula: H = 2w + 8", "Answer: H = 2w + 8"]
+                },
+                {
+                    question: "On a distance-time graph, a straight line means:",
+                    options: ["Speed is changing", "Speed is constant", "The object stopped", "Distance is zero"],
+                    correct: 1,
+                    solution: ["Straight line = constant rate of change", "In distance-time, rate of change = speed", "Straight line means constant speed", "Answer: Speed is constant"]
+                },
+                {
+                    question: "For C = 2.50n + 4, what does the '4' represent?",
+                    options: ["Cost per km", "Total cost", "Fixed flagfall", "Number of km"],
+                    correct: 2,
+                    solution: ["In C = 2.50n + 4:", "2.50n is the variable part (depends on n)", "4 is the constant part (fixed)", "This represents the flagfall (initial charge)", "Answer: Fixed flagfall"]
+                },
+                {
+                    question: "A linear graph has points (2, 11) and (4, 17). What is the slope?",
+                    options: ["2", "3", "4", "6"],
+                    correct: 1,
+                    solution: ["Slope = (change in y) / (change in x)", "Change in y: 17 - 11 = 6", "Change in x: 4 - 2 = 2", "Slope = 6/2 = 3", "Answer: 3"]
+                },
+                {
+                    question: "From a linear graph, when d = 10, H = 44. The formula is H = 3d + c. Find c.",
+                    options: ["4", "14", "24", "34"],
+                    correct: 1,
+                    solution: ["Substitute known values: 44 = 3(10) + c", "Calculate: 44 = 30 + c", "Solve: c = 44 - 30 = 14", "Answer: 14"]
+                },
+                {
+                    question: "Which point is on the line y = 2x + 5?",
+                    options: ["(1, 6)", "(2, 8)", "(3, 10)", "(0, 5)"],
+                    correct: 3,
+                    solution: ["Test each point in y = 2x + 5:", "(1,6): 2(1)+5=7≠6", "(2,8): 2(2)+5=9≠8", "(3,10): 2(3)+5=11≠10", "(0,5): 2(0)+5=5✓", "Answer: (0, 5)"]
+                }
+            ]
+        };
+
+        // State management for each section
+        const sectionState = {
+            patterns: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 },
+            variables: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 },
+            algebraic: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 },
+            expressions: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 },
+            substitution: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 },
+            practical: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 },
+            graphs: { answers: new Array(12).fill(null), showSolutions: new Array(12).fill(false), score: 0 }
+        };
+
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Initialize quiz if not already done
+            if (!document.getElementById(`quiz-${sectionId}`).hasChildNodes()) {
+                initSectionQuiz(sectionId);
+            }
+        }
+
+        // Initialize quiz for a section
+        function initSectionQuiz(sectionId) {
+            const container = document.getElementById(`quiz-${sectionId}`);
+            const questions = questionBanks[sectionId];
+            const state = sectionState[sectionId];
+            
+            container.innerHTML = '';
+            
+            questions.forEach((q, idx) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'question';
+                qDiv.innerHTML = `
+                    <p><span class="question-number">${idx + 1}</span>${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((opt, optIdx) => `
+                            <div class="option ${state.answers[idx] === optIdx ? 'selected' : ''} ${state.answers[idx] !== null ? (optIdx === q.correct ? 'correct' : (optIdx === state.answers[idx] ? 'incorrect' : '')) : ''}" 
+                                 onclick="selectOption('${sectionId}', ${idx}, ${optIdx})">
+                                ${String.fromCharCode(97 + optIdx)}) ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="btn btn-hint" onclick="toggleSolution('${sectionId}', ${idx})" style="margin-top: 10px;">
+                        ${state.showSolutions[idx] ? 'Hide' : 'Show'} Solution Steps
+                    </button>
+                    <div id="solution-${sectionId}-${idx}" class="solution-steps ${state.showSolutions[idx] ? 'show' : ''}">
+                        <strong>Step-by-step solution:</strong>
+                        ${q.solution.map(s => `<div class="step">${s}</div>`).join('')}
+                    </div>
+                `;
+                container.appendChild(qDiv);
+            });
+        }
+
+        // Select option for a question
+        function selectOption(sectionId, qIdx, optIdx) {
+            const state = sectionState[sectionId];
+            if (state.answers[qIdx] === null) {
+                state.answers[qIdx] = optIdx;
+                initSectionQuiz(sectionId);
+                updateScore(sectionId);
+            }
+        }
+
+        // Toggle solution visibility
+        function toggleSolution(sectionId, idx) {
+            sectionState[sectionId].showSolutions[idx] = !sectionState[sectionId].showSolutions[idx];
+            initSectionQuiz(sectionId);
+        }
+
+        // Update score display
+        function updateScore(sectionId) {
+            const state = sectionState[sectionId];
+            const questions = questionBanks[sectionId];
+            let correct = 0;
+            
+            state.answers.forEach((ans, idx) => {
+                if (ans === questions[idx].correct) correct++;
+            });
+            
+            state.score = correct;
+            document.getElementById(`score-${sectionId}`).textContent = `Score: ${correct}/12`;
+        }
+
+        // Submit section
+        function submitSection(sectionId) {
+            const state = sectionState[sectionId];
+            const answered = state.answers.filter(a => a !== null).length;
+            const correct = state.score;
+            
+            if (answered < 12) {
+                alert(`You've answered ${answered}/12 questions. Finish all questions before submitting!`);
+                return;
+            }
+            
+            let message = `Section ${sectionId.toUpperCase()} Results:\n\n`;
+            message += `Score: ${correct}/12\n`;
+            message += `Percentage: ${Math.round((correct/12)*100)}%\n\n`;
+            
+            if (correct === 12) {
+                message += "🌟 PERFECT SCORE! You're a master!";
+            } else if (correct >= 10) {
+                message += "🎉 Excellent work! Almost perfect!";
+            } else if (correct >= 8) {
+                message += "👍 Good job! Keep practicing!";
+            } else if (correct >= 6) {
+                message += "📚 Getting there! Review the material.";
+            } else {
+                message += "💪 Keep trying! Check the solutions and learn.";
+            }
+            
+            alert(message);
+        }
+
+        // Reset section
+        function resetSection(sectionId) {
+            sectionState[sectionId] = {
+                answers: new Array(12).fill(null),
+                showSolutions: new Array(12).fill(false),
+                score: 0
+            };
+            initSectionQuiz(sectionId);
+            document.getElementById(`score-${sectionId}`).textContent = `Score: 0/12`;
+        }
+
+        // Initialize first section
+        window.onload = function() {
+            initSectionQuiz('patterns');
+        };
+    </script>
+</body>
+</html>
